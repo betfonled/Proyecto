@@ -6,9 +6,10 @@ import { LoginService } from '../../services/login.service';
 import { ILogin } from 'src/app/components/interfaces/login.interface';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    standalone: false
 })
 export class LoginComponent implements OnInit, OnDestroy {
   //Declaracion de variables

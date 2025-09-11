@@ -17,7 +17,7 @@ import { LoginModule } from './components/logic/authentication/login/login.modul
 import { NavigationComponent } from './navigation/navigation.component';
 import {MatTableModule} from '@angular/material/table';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthorizeInterceptor } from '../app/cors/AuthorizeInterceptor'
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -29,51 +29,45 @@ const myTheme: any = {
   color: 'white',
 };
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatFormFieldModule,    
-    LoginModule,
-    MatTableModule,
-    JwtModule,
-    HttpClientModule,
-    FormsModule,
-    MatMomentDateModule,
-    CommonModule,
-    MatDividerModule
-  ],
-  exports:[
-    MatToolbarModule,
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
-  providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: myTheme },
-    [{
-      provide: HTTP_INTERCEPTORS,
-      useClass:AuthorizeInterceptor,
-      multi:true
-     }],
-     {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy
-     }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        NavigationComponent,
+    ],
+    exports: [
+        MatToolbarModule,
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        LoginModule,
+        MatTableModule,
+        JwtModule,
+        FormsModule,
+        MatMomentDateModule,
+        CommonModule,
+        MatDividerModule], providers: [
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: myTheme },
+        [{
+                provide: HTTP_INTERCEPTORS,
+                useClass: AuthorizeInterceptor,
+                multi: true
+            }],
+        {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }

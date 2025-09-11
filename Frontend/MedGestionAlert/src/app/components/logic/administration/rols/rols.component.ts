@@ -17,9 +17,10 @@ import { RolsOptionsService } from '../../services/rols-options.service';
 import { IRolOption } from '@app/components/interfaces/rols-options.interface';
 
 @Component({
-  selector: 'app-rols',
-  templateUrl: './rols.component.html',
-  styleUrls: ['./rols.component.css', '../../../../../styles.css'],
+    selector: 'app-rols',
+    templateUrl: './rols.component.html',
+    styleUrls: ['./rols.component.css', '../../../../../styles.css'],
+    standalone: false
 })
 export class RolsComponent implements OnInit {
   displayedColumns: string[] = ['rol', 'option-buttons'];
