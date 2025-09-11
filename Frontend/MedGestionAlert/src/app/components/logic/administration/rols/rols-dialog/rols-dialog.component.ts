@@ -8,9 +8,10 @@ import { DialogData } from '../../users/users.component';
 
 
 @Component({
-  selector: 'app-rols-dialog',
-  templateUrl: './rols-dialog.component.html',
-  styleUrls: ['./rols-dialog.component.css']
+    selector: 'app-rols-dialog',
+    templateUrl: './rols-dialog.component.html',
+    styleUrls: ['./rols-dialog.component.css'],
+    standalone: false
 })
 export class RolsDialogComponent implements OnInit{
   form!: FormGroup;

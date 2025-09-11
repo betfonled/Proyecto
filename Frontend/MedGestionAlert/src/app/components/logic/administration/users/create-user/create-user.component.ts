@@ -10,9 +10,10 @@ import { UsersService } from '@app/components/logic/services/users.service';
 import { IUser } from '@app/components/interfaces/users.interface';
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css'],
+    selector: 'app-create-user',
+    templateUrl: './create-user.component.html',
+    styleUrls: ['./create-user.component.css'],
+    standalone: false
 })
 export class CreateUserComponent {
 
