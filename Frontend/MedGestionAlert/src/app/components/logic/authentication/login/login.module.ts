@@ -12,8 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card'
-
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,9 @@ import { MatCardModule } from '@angular/material/card'
     MatButtonModule,
     MatDividerModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class LoginModule { }
