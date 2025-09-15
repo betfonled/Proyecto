@@ -2,9 +2,11 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IClient } from '@app/components/interfaces/load-information.interface';
 import { IRol } from '@app/components/interfaces/rols.interface';
 import { IUser } from '@app/components/interfaces/users.interface';
 import { CreateUserComponent } from '@app/components/logic/administration/users/create-user/create-user.component';
+import { ClientsService } from '@app/components/logic/services/clients.service';
 import { RolsService } from '@app/components/logic/services/rols.service';
 import { UsersService } from '@app/components/logic/services/users.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -24,11 +26,11 @@ export class CreateClientsComponent {
   dataSource = new MatTableDataSource();
 
   constructor(
-    public dialogRef: MatDialogRef<CreateUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IUser,
+    public dialogRef: MatDialogRef<CreateClientsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IClient,
     private fb: FormBuilder,
     private rolSVC: RolsService,
-    private UserSVC: UsersService,
+    private ClientSVC: ClientsService,
   ) {}
 
 
@@ -57,9 +59,9 @@ export class CreateClientsComponent {
         id: [this.data.id],
         email: [this.data.email],
         userName: [this.data.userName],
-        rol: [this.data.rol],
-        passwordApp: [this.data.passwordApp],
-        passwordApp2: [this.data.passwordApp],
+        telefono: [this.data.telefono],
+        direccion: [this.data.direccion],
+        proyecto: [this.data.proyecto],
         stateSession: [this.data.stateSession],
       });
     }
@@ -72,7 +74,7 @@ export class CreateClientsComponent {
 
 
   getElement(id:number){
-    this.UserSVC.getById(id).subscribe(res=>{
+    this.ClientSVC.getById(id).subscribe(res=>{
       this.formCrear.patchValue(res);
     })
   }
@@ -81,11 +83,11 @@ export class CreateClientsComponent {
     const formValue= this.formCrear.value;
     console.log(formValue)
     if(formValue.id==0 || formValue.id==null){
-      this.UserSVC.new(formValue).subscribe(res=>{
+      this.ClientSVC.new(formValue).subscribe(res=>{
         this.clearForm();
       });
     }else{
-      this.UserSVC.update(formValue.id, formValue).subscribe(res =>{
+      this.ClientSVC.update(formValue.id, formValue).subscribe(res =>{
         console.log("se edito usuario => ",res);
         this.formCrear.reset();
         this.clearForm()
@@ -95,7 +97,7 @@ export class CreateClientsComponent {
   }
 
   clearForm(): void {
-    this.UserSVC.getAll().pipe(takeUntil(this.destroy$)).subscribe();
+    this.ClientSVC.getAll().pipe(takeUntil(this.destroy$)).subscribe();
     setTimeout(() => {
       this.formCrear.reset();
       this.ngOnInit()
