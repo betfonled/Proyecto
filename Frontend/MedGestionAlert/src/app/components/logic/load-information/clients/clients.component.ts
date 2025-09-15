@@ -10,6 +10,7 @@ import { CreateUserComponent } from '../../administration/users/create-user/crea
 import { RolsService } from '../../services/rols.service';
 import { UsersService } from '../../services/users.service';
 import { IClient } from '@app/components/interfaces/load-information.interface';
+import { CreateClientsComponent } from './create-clients/create-clients.component';
 
 @Component({
   selector: 'app-clients',
@@ -54,7 +55,7 @@ export class ClientsComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateUserComponent, {
+    const dialogRef = this.dialog.open(CreateClientsComponent, {
       data: { id: this.id ,email:this.email, userName:this.userName, 
         telefono:this.rol,direccion:this.passwordApp,proyecto:this.passwordApp,stateSession:this.stateSession, idRol:this.idRol},
     });
