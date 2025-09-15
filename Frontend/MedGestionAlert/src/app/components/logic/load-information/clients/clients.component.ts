@@ -9,6 +9,7 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 import { CreateUserComponent } from '../../administration/users/create-user/create-user.component';
 import { RolsService } from '../../services/rols.service';
 import { UsersService } from '../../services/users.service';
+import { IClient } from '@app/components/interfaces/load-information.interface';
 
 @Component({
   selector: 'app-clients',
@@ -55,7 +56,7 @@ export class ClientsComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateUserComponent, {
       data: { id: this.id ,email:this.email, userName:this.userName, 
-        rol:this.rol,passwordApp:this.passwordApp,stateSession:this.stateSession, idRol:this.idRol},
+        telefono:this.rol,direccion:this.passwordApp,proyecto:this.passwordApp,stateSession:this.stateSession, idRol:this.idRol},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -77,14 +78,8 @@ export class ClientsComponent {
       email: ['', Validators.required],
       userName: ['', Validators.required],
       telefono: ['', Validators.required],
-      passwordApp: ['', [Validators.required,
-      Validators.pattern('((?:.*[A-Z]){1})((?:.*[a-z]){1})((?:.*[0-9]){1})((?:.*[!,@,#,$,%,^,&,*,?,_,~]){1})'),
-      Validators.minLength(6)
-      ]],
-      passwordApp2: ['', [Validators.required,
-        Validators.pattern('((?:.*[A-Z]){1})((?:.*[a-z]){1})((?:.*[0-9]){1})((?:.*[!,@,#,$,%,^,&,*,?,_,~]){1})'),
-        Validators.minLength(6)
-      ] ],
+      direccion: ['', [Validators.required]],
+      proyecto: ['', [Validators.required] ],
       stateSession: ['', Validators.required]
     });
 
@@ -116,10 +111,10 @@ export class ClientsComponent {
     })
   }
 
-  onUpdateUsers(user: IUser):void{
+  onUpdateUsers(client: IClient):void{
     this.dialog.open(CreateUserComponent, {
-      data: {id:user.id,email:user.email, userName:user.userName, 
-            rol:user.rol,passwordApp:user.passwordApp,passwordApp2:user.passwordApp, stateSession:user.stateSession, idRol:user.idRol},
+      data: {id:client.id,email:client.email, userName:client.userName, 
+            telefono:client.telefono,direccion:client.direccion,proyecto:client.proyecto, stateSession:client.stateSession, idRol:client.idRol},
     });
    }
 
